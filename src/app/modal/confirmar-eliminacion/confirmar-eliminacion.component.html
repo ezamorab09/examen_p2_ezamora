@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirmar Eliminación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <p>¿Estás seguro de que deseas eliminar esta publicación?</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="danger" (click)="confirmar()">Eliminar</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" (click)="cancelar()">Cancelar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

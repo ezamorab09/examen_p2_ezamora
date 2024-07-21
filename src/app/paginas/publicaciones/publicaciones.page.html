@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateToPublicacion()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>publicaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let aviso of avisos">
+      <ion-thumbnail slot="start">
+        <img [src]="aviso.imagen" *ngIf="aviso.imagen">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ aviso.titulo }}</h2>
+        <p>{{ aviso.descripcion }}</p>
+        <p>{{ aviso.fecha | date: 'short' }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="danger" (click)="confirmarEliminacion(aviso.id)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="agregarAviso()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>

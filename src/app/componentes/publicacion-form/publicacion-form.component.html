@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Publicación</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/publicaciones"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="publicacionForm" (ngSubmit)="crearAviso()">
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input formControlName="titulo" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="publicacionForm.get('titulo')?.invalid && (publicacionForm.get('titulo')?.dirty || publicacionForm.get('titulo')?.touched)">
+      <ion-text color="danger" *ngIf="publicacionForm.get('titulo')?.errors?.['required']">El título es obligatorio.</ion-text>
+      <ion-text color="danger" *ngIf="publicacionForm.get('titulo')?.errors?.['minlength']">El título debe tener al menos 5 caracteres.</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea formControlName="descripcion"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="publicacionForm.get('descripcion')?.invalid && (publicacionForm.get('descripcion')?.dirty || publicacionForm.get('descripcion')?.touched)">
+      <ion-text color="danger" *ngIf="publicacionForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</ion-text>
+      <ion-text color="danger" *ngIf="publicacionForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 20 caracteres.</ion-text>
+    </ion-item>
+
+    <ion-button type="button" expand="block" (click)="tomarFoto()">
+      <ion-icon slot="start" name="camera-outline"></ion-icon>
+      Tomar Foto
+    </ion-button>
+
+    <ion-item *ngFor="let foto of fotos">
+      <ion-card slot="start">
+        <ion-img [src]="foto"></ion-img>
+      </ion-card>
+      <ion-button slot="end" fill="clear" color="danger" (click)="eliminarFoto(foto)">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-button type="submit" expand="block">
+      <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+      Crear Aviso
+    </ion-button>
+  </form>
+</ion-content>

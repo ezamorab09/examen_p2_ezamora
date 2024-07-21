@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="volverAPublicaciones()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="publicacionForm" (ngSubmit)="crearAviso()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Título</ion-label>
+            <ion-input formControlName="titulo" type="text"></ion-input>
+          </ion-item>
+          <ion-note *ngIf="publicacionForm?.get('titulo')?.touched && publicacionForm.get('titulo')?.hasError('required')" color="danger">
+            El título es obligatorio.
+          </ion-note>
+          <ion-note *ngIf="publicacionForm?.get('titulo')?.touched && publicacionForm.get('titulo')?.hasError('minlength')" color="danger">
+            El título debe tener al menos 5 caracteres.
+          </ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-textarea formControlName="descripcion"></ion-textarea>
+          </ion-item>
+          <ion-note *ngIf="publicacionForm.get('descripcion')?.touched && publicacionForm.get('descripcion')?.hasError('required')" color="danger">
+            La descripción es obligatoria.
+          </ion-note>
+          <ion-note *ngIf="publicacionForm.get('descripcion')?.touched && publicacionForm.get('descripcion')?.hasError('minlength')" color="danger">
+            La descripción debe tener al menos 20 caracteres.
+          </ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Fecha</ion-label>
+            <ion-input formControlName="fecha" type="date" ></ion-input>
+          </ion-item>
+          <ion-note *ngIf="publicacionForm.get('fecha')?.touched && publicacionForm.get('fecha')?.hasError('required')" color="danger">
+            La fecha es obligatoria.
+          </ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="2" *ngFor="let f of fotos">
+          <ion-img [src]="'data:image/jpg;base64,'+f"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" type="submit" [disabled]="publicacionForm.invalid">Crear Aviso</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
